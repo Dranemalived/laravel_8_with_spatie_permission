@@ -22,14 +22,49 @@
                     <div class="form-group">
                         <label for="">Permissions</label>
                     </div>
-                    @foreach($permissions as $permission)
-                        <div class="form-check">
-                            <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $permission->name }}"> {{ str_replace('_', ' ',$permission->name) }} <i class="input-helper"></i>
-                            </label>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h4 class="mb-4">View</h4>
+                            @foreach($_view as $v)            
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $v->name }}"> {{ str_replace('_', ' ',$v->name) }} <i class="input-helper"></i>
+                                    </label>
+                                </div>
+                            @endforeach
                         </div>
-                    @endforeach
-                    <div class="form-group mt-2">
+                        <div class="col-md-3">
+                            <h4 class="mb-4">Create</h4>
+                            @foreach($_create as $c)        
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $c->name }}"> {{ str_replace('_', ' ',$c->name) }} <i class="input-helper"></i>
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="mb-4">Edit</h4>
+                            @foreach($_edit as $e)    
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $e->name }}"> {{ str_replace('_', ' ',$e->name) }} <i class="input-helper"></i>
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <div class="col-md-3">
+                            <h4 class="mb-4">Delete</h4>
+                            @foreach($_delete as $d)
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $d->name }}"> {{ str_replace('_', ' ',$d->name) }} <i class="input-helper"></i>
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="form-group mt-5">
                         <button type="submit" class="btn btn-success">Save</button>
                         <a href="/permission" class="btn btn-light">Cancel</a>
                     </div>

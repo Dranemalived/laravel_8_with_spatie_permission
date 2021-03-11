@@ -21,7 +21,31 @@ class PermissionController extends Controller
         $roles = Role::all();
         $permissions = Permission::all();
 
-        return view('permission.permission_create', compact('roles', 'permissions'));
+        $_view = [];
+        $_create = [];
+        $_edit = [];
+        $_delete = [];
+
+        foreach ($permissions as $permission) {
+            $type = strstr($permission->name, '_', true);
+
+            switch ($type):
+                case "view":
+                    array_push($_view, $permission);
+                    break;
+                case "create":
+                    array_push($_create, $permission);
+                    break;
+                case "edit":
+                    array_push($_edit, $permission);
+                    break;
+                case "delete":
+                    array_push($_delete, $permission);
+                    break;
+            endswitch;
+        }
+
+        return view('permission.permission_create', compact('roles', '_view', '_create', '_edit', '_delete'));
     }
 
     public function store(Request $request)

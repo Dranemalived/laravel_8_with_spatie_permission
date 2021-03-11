@@ -31,12 +31,17 @@
                     </div>
                     <div class="form-group">
                         <label for="">Role</label>
-                        <select name="role_id[]" id="" class="custom-select select-2" multiple="multiple">
+                        <select name="role[]" id="" class="custom-select select-2 {{ $errors->any() ? ($errors->has('role') ? "is-invalid" : "is-valid") : "" }}" multiple="multiple">
                             <option value="" disabled>select role</option>
                             @foreach($roles as $role)
-                                <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                <option value="{{ $role->id }}" {{ ($errors->any() && $errors->has('role')) ? "" : ($user->hasRole($role->name) ? "selected" : "") }} >{{ $role->name }}</option>
                             @endforeach
                         </select>
+                        @if($errors->any())
+                            <div class="{{ $errors->has('role') ? "invalid-feedback" : "valid-feedback" }}">
+                                {{ $errors->has('role')  ? $errors->first('role') : ""}}
+                            </div>
+                        @endif
                     </div>
                     <div class="form-group mt-2">
                         <button type="submit" class="btn btn-success">Save</button>

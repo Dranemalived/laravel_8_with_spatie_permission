@@ -26,14 +26,15 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|string|unique:users,name,' . $id,
-            'email' => 'required|email|unique:users,email,' . $id
+            'email' => 'required|email|unique:users,email,' . $id,
+            'role' => 'required'
         ]);
 
         $user = User::findOrFail($id);
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->assignRole($request->role_id);
+        $user->assignRole($request->role);
 
         $user->save();
 
