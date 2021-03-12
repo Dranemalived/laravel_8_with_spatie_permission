@@ -75,28 +75,5 @@
         </a>
       </li>
       @endif
-      <li class="nav-item">
-        <a class="nav-link" href="pages/tables/basic-table.html">
-          <span class="menu-title">Site Settings</span>
-          <i class="mdi mdi-settings menu-icon"></i>
-        </a>
-      </li>
-      <li class="nav-item sidebar-actions">
-        <span class="nav-link">
-          <div class="border-bottom">
-            <h6 class="font-weight-normal mb-3">Projects</h6>
-          </div>
-          <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+ Add a project</button>
-          <div class="mt-4">
-            <div class="border-bottom">
-              <p class="text-secondary">Options</p>
-            </div>
-            <ul class="gradient-bullet-list mt-4">
-              <li>Free</li>
-              <li>Pro</li>
-            </ul>
-          </div>
-        </span>
-      </li>
     </ul>
   </nav>

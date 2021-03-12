@@ -58,4 +58,13 @@ class PermissionController extends Controller
 
         return redirect('/permission')->with('success', 'Permission mapped successfully');
     }
+
+    public function search(Request $request)
+    {
+        $role_id = $request->role_id;
+
+        // $permissions = Permission::where('role_id', $role_id)->pluck('name')->toArray();
+
+        // return redirect('/permission/create', compact('permissions'));
+    }
 }

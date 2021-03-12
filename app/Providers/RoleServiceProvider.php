@@ -25,9 +25,13 @@ class RoleServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(
-            ['partials.body_sidebar', 'admin.product'],
-            RoleComposer::class
-        );
+        /**Share to the defined view only. I don't want that */
+        // View::composer(
+        //     ['partials.body_sidebar', 'admin.product'],
+        //     RoleComposer::class
+        // );
+
+        /**Share to all views */
+        View::composer('*', RoleComposer::class);
     }
 }

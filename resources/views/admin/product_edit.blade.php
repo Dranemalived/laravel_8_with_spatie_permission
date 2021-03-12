@@ -61,13 +61,15 @@
                         <a href="/product" class="btn btn-light">Cancel</a>
                     </div>
                 </form>
-                <form action="{{ url('/product', ['id' => $product->id]) }}" method="post">
-                    @method('delete')
-                    @csrf
-                    <div class="form-group" style="border:1px solid red;">
-                        <input type="submit" class="btn btn-danger" value="Delete">
-                    </div>
-                </form>
+                @if($is_user->hasPermissionTo('delete_product'))
+                    <form action="{{ url('/product', ['id' => $product->id]) }}" method="post">
+                        @method('delete')
+                        @csrf
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-danger" value="Delete">
+                        </div>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

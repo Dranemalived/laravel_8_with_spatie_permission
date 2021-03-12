@@ -8,9 +8,9 @@
 
     <div class="card">
         <div class="card-body">
-            {{-- @if($is_user->hasPermissionTo('view category')) --}}
+            @if($is_user->hasPermissionTo('create_product'))
                 <a class="btn btn-primary mb-4" href="/product/create">Create Product</a>
-            {{-- @endif --}}
+            @endif
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -31,7 +31,11 @@
                             <td>{{ $product->category->name }}</td>
                             <td>{{ $product->quantity }}</td>
                             <td>{{ $product->price }}</td>
-                            <td><a href="/product/{{ $product->id }}/edit"><i class="mdi mdi-pencil"></i></a></td>
+                            <td>
+                                @if($is_user->hasPermissionTo('edit_product'))
+                                    <a href="/product/{{ $product->id }}/edit"><i class="mdi mdi-pencil"></i></a>
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     @else

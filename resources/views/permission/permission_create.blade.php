@@ -8,17 +8,21 @@
 
         <div class="card">
             <div class="card-body">
-                <form action="/permission/create" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label for="">Name</label>
-                        <select name="role_id" id="" class="custom-select">
+                <div class="form-group">
+                    <label for="">Name</label>
+                    <form action="/permission/create/search" method="post">
+                        @csrf
+                        <select name="role_id" id="" class="custom-select" onchange="javascript:this.form.submit()">
                             <option value="" selected disabled>Select Role</option>
                             @foreach($roles as $role)
                                 <option value="{{ $role->id }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </form>
+                </div>
+                <form action="/permission/create" method="post">
+                    @csrf
+                    
                     <div class="form-group">
                         <label for="">Permissions</label>
                     </div>

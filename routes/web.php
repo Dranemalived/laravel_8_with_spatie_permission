@@ -28,10 +28,35 @@ Route::middleware(['auth'])->group(function () {
         return redirect('/category');
     });
 
-    Route::resources([
-        'category' => CategoryController::class,
-        'product' => ProductController::class
-    ]);
+    // Route::resources([
+    //     'category' => CategoryController::class,
+    //     'product' => ProductController::class
+    // ]);
+
+    /**Category route */
+    Route::get('/category', [CategoryController::class, 'index'])->middleware('permission:view_category');
+    Route::middleware(['permission:create_category'])->group(function () {
+        Route::get('/category/create', [CategoryController::class, 'create']);
+        Route::post('/category/create', [CategoryController::class, 'store']);
+    });
+    Route::middleware(['permission:edit_category'])->group(function () {
+        Route::get('/category/{id}/edit', [CategoryController::class, 'edit']);
+        Route::put('/category/{id}', [CategoryController::class, 'update']);
+    });
+    Route::delete('/category/{id}', [CategoryController::class, 'delete'])->middleware('permission:delete_category');
+
+    /**Product route */
+    Route::get('/product', [ProductController::class, 'index'])->middleware('permission:view_product');
+    Route::middleware(['permission:create_product'])->group(function () {
+        Route::get('/product/create', [ProductController::class, 'create']);
+        Route::post('/product/create', [ProductController::class, 'store']);
+    });
+    Route::middleware(['permission:edit_product'])->group(function () {
+        Route::get('/product/{id}/edit', [ProductController::class, 'edit']);
+        Route::put('/product/{id}', [ProductController::class, 'update']);
+    });
+    Route::delete('/product/{id}', [ProductController::class, 'delete'])->middleware('permission:delete_product');
+
 
     // Route::middleware(['roles:user'])->group(function () {
     //     Route::get('/user', [UserController::class, 'index']);
@@ -60,6 +85,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/permission', [PermissionController::class, 'index']);
     Route::get('/permission/create', [PermissionController::class, 'create']);
     Route::post('/permission/create', [PermissionController::class, 'store']);
+    Route::post('/permission/create/search', [PermissionController::class, 'search']);
 });
 
 

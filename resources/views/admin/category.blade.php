@@ -8,7 +8,9 @@
 
     <div class="card">
         <div class="card-body">
-            <a class="btn btn-primary mb-4" href="/category/create">Create Category</a>
+            @if($is_user->hasPermissionTo('create_category'))
+                <a class="btn btn-primary mb-4" href="/category/create">Create Category</a>
+            @endif
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -23,7 +25,11 @@
                         <tr>
                             <td>{{ $category->name }}</td>
                             <td>{{ $category->description }}</td>
-                            <td><a href="/category/{{ $category->id }}/edit"><i class="mdi mdi-pencil"></i></a></td>
+                            <td>
+                                @if($is_user->hasPermissionTo('edit_category'))
+                                    <a href="/category/{{ $category->id }}/edit"><i class="mdi mdi-pencil"></i></a>
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     @else

@@ -12,7 +12,11 @@ class RoleComposer
 
     public function __construct()
     {
-        $this->user = User::find(Auth::user()->id);
+        $this->user = null;
+
+        if (Auth::user()) {
+            $this->user = User::find(Auth::user()->id);
+        }
     }
 
     public function compose(View $view)
