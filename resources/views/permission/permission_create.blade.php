@@ -26,47 +26,57 @@
                     <div class="form-group">
                         <label for="">Permissions</label>
                     </div>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <h4 class="mb-4">View</h4>
-                            @foreach($_view as $v)            
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $v->name }}"> {{ str_replace('_', ' ',$v->name) }} <i class="input-helper"></i>
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="col-md-3">
-                            <h4 class="mb-4">Create</h4>
-                            @foreach($_create as $c)        
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $c->name }}"> {{ str_replace('_', ' ',$c->name) }} <i class="input-helper"></i>
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="col-md-3">
-                            <h4 class="mb-4">Edit</h4>
-                            @foreach($_edit as $e)    
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $e->name }}"> {{ str_replace('_', ' ',$e->name) }} <i class="input-helper"></i>
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="col-md-3">
-                            <h4 class="mb-4">Delete</h4>
-                            @foreach($_delete as $d)
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $d->name }}"> {{ str_replace('_', ' ',$d->name) }} <i class="input-helper"></i>
-                                    </label>
-                                </div>
-                            @endforeach
-                        </div>
+                    <div class="form-group">
+                        <table class="table table-bordered table-striped table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Function Name</th>
+                                    <th width="5%">View</th>
+                                    <th width="5%">Create</th>
+                                    <th width="5%">Edit</th>
+                                    <th width="5%">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for($x = 0; $x < count($_view); $x++)
+                                    @php
+                                        $title = str_replace('_','',strstr($_view[$x]->name,"_"));
+                                    @endphp
+
+                                    <tr>
+                                        <td>{{ ucwords($title) }}</td>
+                                        <td>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $_view[$x]->name }}">&nbsp;
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $_create[$x]->name }}">&nbsp;
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $_edit[$x]->name }}">&nbsp;
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="checkbox" class="form-check-input" name="permission[]" value="{{ $_delete[$x]->name }}">&nbsp;
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endfor
+                            </tbody>
+                        </table>
                     </div>
                     <div class="form-group mt-5">
                         <button type="submit" class="btn btn-success">Save</button>
